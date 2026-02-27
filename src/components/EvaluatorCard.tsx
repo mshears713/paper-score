@@ -4,8 +4,10 @@ import { cn } from "@/lib/utils";
 
 interface EvaluationDetail {
   score?: number | null;
-  assessment?: string | null;
-  details?: string | null;
+  priority_label?: string | null;
+  strengths?: string[] | null;
+  risks?: string[] | null;
+  questions_to_ask?: string[] | null;
   [key: string]: unknown;
 }
 
@@ -20,45 +22,85 @@ const EvaluatorCard = ({ title, evaluation }: EvaluatorCardProps) => {
   if (!evaluation) return null;
 
   const score = evaluation.score;
-  const assessment = evaluation.assessment;
-  const details = evaluation.details;
+  const strengths = evaluation.strengths ?? [];
+  const risks = evaluation.risks ?? [];
+  const questions = evaluation.questions_to_ask ?? [];
 
   return (
-    <div className="rounded-xl border border-border bg-card shadow-card transition-shadow hover:shadow-card-hover">
+    <div className="rounded-lg border border-border bg-card">
       <button
         onClick={() => setOpen(!open)}
         className="flex w-full items-center justify-between px-5 py-4 text-left"
       >
         <div className="flex items-center gap-3">
           <span className="text-sm font-semibold text-card-foreground">{title}</span>
-          {score != null && (
-            <span className="rounded-md bg-secondary px-2 py-0.5 text-xs font-medium text-secondary-foreground">
-              {score.toFixed(1)}
+          {evaluation.priority_label && (
+            <span className="rounded bg-secondary px-2 py-0.5 text-xs text-secondary-foreground">
+              {evaluation.priority_label}
             </span>
           )}
         </div>
-        <ChevronDown
-          className={cn(
-            "h-4 w-4 text-muted-foreground transition-transform duration-200",
-            open && "rotate-180"
+        <div className="flex items-center gap-3">
+          {score != null && (
+            <span className="text-sm font-medium text-muted-foreground">
+              {score.toFixed(1)}
+            </span>
           )}
-        />
+          <ChevronDown
+            className={cn(
+              "h-4 w-4 text-muted-foreground",
+              open && "rotate-180"
+            )}
+          />
+        </div>
       </button>
 
-      <div
-        className={cn(
-          "overflow-hidden transition-all duration-200 ease-in-out",
-          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-        )}
-      >
-        <div className="border-t border-border px-5 py-4 text-sm leading-relaxed text-card-foreground/85">
-          {assessment && <p className="mb-2">{assessment}</p>}
-          {details && <p className="text-muted-foreground">{details}</p>}
-          {!assessment && !details && (
+      {open && (
+        <div className="border-t border-border px-5 py-4 text-sm text-card-foreground/85 space-y-3">
+          {strengths.length > 0 && (
+            <div>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">Strengths</h4>
+              <ul className="space-y-1">
+                {strengths.map((s, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-strength" />
+                    {s}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {risks.length > 0 && (
+            <div>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">Risks</h4>
+              <ul className="space-y-1">
+                {risks.map((r, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-risk" />
+                    {r}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {questions.length > 0 && (
+            <div>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">Questions to Ask</h4>
+              <ul className="space-y-1">
+                {questions.map((q, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-muted-foreground/40" />
+                    {q}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {strengths.length === 0 && risks.length === 0 && questions.length === 0 && (
             <p className="text-muted-foreground italic">No details available.</p>
           )}
         </div>
-      </div>
+      )}
     </div>
   );
 };

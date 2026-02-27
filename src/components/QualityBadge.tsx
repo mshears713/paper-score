@@ -6,30 +6,29 @@ interface QualityBadgeProps {
 }
 
 const bandConfig: Record<string, { label: string; colorClass: string }> = {
-  excellent: { label: "Excellent", colorClass: "bg-quality-excellent text-white" },
-  good: { label: "Good", colorClass: "bg-quality-good text-white" },
-  moderate: { label: "Moderate", colorClass: "bg-quality-moderate text-white" },
-  low: { label: "Low", colorClass: "bg-quality-low text-white" },
+  "high quality": { label: "High Quality", colorClass: "bg-quality-excellent text-white" },
+  "moderate quality": { label: "Moderate Quality", colorClass: "bg-quality-moderate text-white" },
+  "low quality": { label: "Low Quality", colorClass: "bg-quality-low text-white" },
 };
 
 const QualityBadge = ({ qualityBand, overallScore }: QualityBadgeProps) => {
-  const band = qualityBand?.toLowerCase() ?? "moderate";
-  const config = bandConfig[band] ?? bandConfig.moderate;
+  const band = qualityBand?.toLowerCase() ?? "moderate quality";
+  const config = bandConfig[band] ?? bandConfig["moderate quality"];
 
   return (
     <div className="flex items-center gap-4">
       <span
         className={cn(
-          "inline-flex items-center rounded-lg px-5 py-2.5 text-lg font-semibold tracking-wide",
+          "inline-flex items-center rounded-md px-4 py-2 text-base font-semibold",
           config.colorClass
         )}
       >
         {config.label}
       </span>
       {overallScore != null && (
-        <span className="text-2xl font-semibold text-muted-foreground">
+        <span className="text-3xl font-bold text-foreground">
           {overallScore.toFixed(1)}
-          <span className="text-sm font-normal text-muted-foreground/70"> / 10</span>
+          <span className="text-sm font-normal text-muted-foreground"> / 10</span>
         </span>
       )}
     </div>
