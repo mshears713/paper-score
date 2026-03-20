@@ -83,20 +83,7 @@ const EvaluatorCard = ({ title, evaluation }: EvaluatorCardProps) => {
               </ul>
             </div>
           )}
-          {questions.length > 0 && (
-            <div>
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">Questions to Ask</h4>
-              <ul className="space-y-1">
-                {questions.map((q, i) => (
-                  <li key={i} className="flex gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-muted-foreground/40" />
-                    {q}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-          {strengths.length === 0 && risks.length === 0 && questions.length === 0 && (
+          {strengths.length === 0 && risks.length === 0 && (
             <p className="text-muted-foreground italic">No details available.</p>
           )}
         </div>

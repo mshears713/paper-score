@@ -146,6 +146,12 @@ const Index = () => {
                 </p>
               </div>
 
+              {/* Strengths & Risks */}
+              <StrengthsRisks
+                strengths={result.aggregation?.top_strengths}
+                risks={result.aggregation?.top_risks}
+              />
+
               {/* Evaluator cards */}
               <div>
                 <h2 className="mb-3 text-lg font-bold text-foreground">Evaluations</h2>
@@ -161,12 +167,6 @@ const Index = () => {
                   ))}
                 </div>
               </div>
-
-              {/* Strengths & Risks */}
-              <StrengthsRisks
-                strengths={result.aggregation?.top_strengths}
-                risks={result.aggregation?.top_risks}
-              />
             </div>
           )}
 

@@ -80,6 +80,26 @@ const FileUploadSection = ({ onAnalyze, isLoading }: FileUploadSectionProps) => 
           "Analyze Paper"
         )}
       </button>
+
+      <button
+        onClick={() => {
+          if (!selectedFile) return;
+          const url = URL.createObjectURL(selectedFile);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = selectedFile.name;
+          a.click();
+          URL.revokeObjectURL(url);
+        }}
+        disabled={!selectedFile || isLoading}
+        className={cn(
+          "mt-2 inline-flex w-full items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-colors",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          "disabled:cursor-not-allowed disabled:opacity-50"
+        )}
+      >
+        Download PDF
+      </button>
     </div>
   );
 };
