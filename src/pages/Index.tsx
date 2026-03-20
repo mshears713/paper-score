@@ -100,7 +100,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-border bg-card">
-        <div className="mx-auto flex max-w-5xl items-center gap-3 px-6 py-5">
+        <div className="mx-auto flex max-w-5xl items-center gap-3 px-4 py-4 md:px-6 md:py-5">
           <FlaskConical className="h-6 w-6 text-primary" />
           <h1 className="text-2xl font-bold leading-tight text-foreground">
             Paper Evaluator
@@ -108,9 +108,9 @@ const Index = () => {
         </div>
       </header>
 
-      <div className="mx-auto flex max-w-5xl gap-6 px-6 py-8">
+      <div className="mx-auto flex max-w-5xl flex-col gap-6 px-4 py-6 md:flex-row md:px-6 md:py-8">
         {/* Left panel */}
-        <aside className="w-72 flex-shrink-0">
+        <aside className="w-full md:w-72 md:flex-shrink-0">
           <FileUploadSection onAnalyze={handleAnalyze} isLoading={loading} />
         </aside>
 
@@ -131,7 +131,7 @@ const Index = () => {
           {result && (
             <div className="space-y-6">
               {/* Quality badge */}
-              <div className="rounded-lg border border-border bg-card p-6">
+              <div className="rounded-lg border border-border bg-card p-4 md:p-6">
                 <QualityBadge
                   qualityBand={result.aggregation?.quality_band}
                   overallScore={result.aggregation?.overall_score}
@@ -139,7 +139,7 @@ const Index = () => {
               </div>
 
               {/* Summary */}
-              <div className="rounded-lg border border-border bg-card p-6">
+              <div className="rounded-lg border border-border bg-card p-4 md:p-6">
                 <h2 className="mb-2 text-lg font-bold text-card-foreground">Summary</h2>
                 <p className="text-sm leading-relaxed text-card-foreground/85">
                   {buildSummary(result)}

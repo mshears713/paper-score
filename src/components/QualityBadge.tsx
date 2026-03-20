@@ -16,7 +16,7 @@ const QualityBadge = ({ qualityBand, overallScore }: QualityBadgeProps) => {
   const config = bandConfig[band] ?? bandConfig["moderate quality"];
 
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex flex-wrap items-center gap-3 md:gap-4">
       <span
         className={cn(
           "inline-flex items-center rounded-md px-4 py-2 text-base font-semibold",
@@ -26,7 +26,7 @@ const QualityBadge = ({ qualityBand, overallScore }: QualityBadgeProps) => {
         {config.label}
       </span>
       {overallScore != null && (
-        <span className="text-3xl font-bold text-foreground">
+        <span className="text-2xl font-bold text-foreground md:text-3xl">
           {overallScore.toFixed(1)}
           <span className="text-sm font-normal text-muted-foreground"> / 10</span>
         </span>

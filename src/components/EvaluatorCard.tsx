@@ -30,7 +30,7 @@ const EvaluatorCard = ({ title, evaluation }: EvaluatorCardProps) => {
     <div className="rounded-lg border border-border bg-card">
       <button
         onClick={() => setOpen(!open)}
-        className="flex w-full items-center justify-between px-5 py-4 text-left"
+        className="flex w-full items-center justify-between px-4 py-3 text-left md:px-5 md:py-4"
       >
         <div className="flex items-center gap-3">
           <span className="text-sm font-semibold text-card-foreground">{title}</span>
@@ -56,7 +56,7 @@ const EvaluatorCard = ({ title, evaluation }: EvaluatorCardProps) => {
       </button>
 
       {open && (
-        <div className="border-t border-border px-5 py-4 text-sm text-card-foreground/85 space-y-3">
+        <div className="border-t border-border px-4 py-3 text-sm text-card-foreground/85 space-y-3 md:px-5 md:py-4">
           {strengths.length > 0 && (
             <div>
               <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">Strengths</h4>

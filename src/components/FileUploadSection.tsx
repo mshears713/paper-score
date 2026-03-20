@@ -25,7 +25,7 @@ const FileUploadSection = ({ onAnalyze, isLoading }: FileUploadSectionProps) => 
   };
 
   return (
-    <div className="rounded-xl border border-border bg-card p-6 shadow-card">
+    <div className="rounded-xl border border-border bg-card p-4 shadow-card md:p-6">
       <h2 className="mb-4 text-xl font-bold text-card-foreground">Upload Paper</h2>
 
       <div
